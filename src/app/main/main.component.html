@@ -1,1 +1,15 @@
-<p>main works!</p>
+
+<div class="col-12">
+    <label for="inputText">Wpisz treść:</label>
+    <input type="text" id="inputText" class="form-control" [(ngModel)]="inputText" placeholder="Wpisz coś...">
+  </div>
+  
+  <div class="col-12">
+    <button type="button" class="btn btn-primary" (click)="addText()">Dodaj</button>
+  </div>
+  
+  <div class="col-12 mt-3">
+    <label>Treść: </label>
+    <div *ngIf="displayedText">{{ displayedText }}</div>
+  </div>
+  
