@@ -1,20 +1,41 @@
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-main',
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgFor,NgIf],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
-  inputText: string = ''; 
-  displayedText: string = ''; 
-
-  // Funkcja wywoływana po kliknięciu przycisku
+  inputText: string = '';
+  texts: { id: number, content: string, isEditing: boolean }[] = [];
+  nextId: number = 0;
+  
   addText() {
-    this.displayedText = this.inputText; 
-    this.inputText = ''; 
+    if (this.inputText.trim()) {
+      this.texts.push({ id: this.nextId++, content: this.inputText.trim(), isEditing: false });
+      this.inputText = '';
+    }
   }
+  
+  removeText(id: number) {
+    this.texts = this.texts.filter(text => text.id !== id);
+  }
+  
+  editText(id: number) {
+    this.texts = this.texts.map(text => ({
+      ...text,
+      isEditing: text.id === id
+    }));
+  }
+  
+  saveEdit(id: number, newValue: string) {
+    this.texts = this.texts.map(text =>
+      text.id === id ? { ...text, content: newValue.trim(), isEditing: false } : text
+    );
+  }
+  
+  
 }
