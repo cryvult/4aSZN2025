@@ -19,7 +19,12 @@ export class MainComponent {
       this.inputText = '';
     }
   }
-  
+  onCheckboxChange(event: Event, id: number) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.removeText(id);
+    }
+  }
   removeText(id: number) {
     this.texts = this.texts.filter(text => text.id !== id);
   }

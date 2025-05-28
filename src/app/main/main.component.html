@@ -17,9 +17,21 @@
     </ng-container>
 
     <ng-template #displayText>
-      <span class="badge bg-secondary flex-grow-1 p-2">{{ text.content }}</span>
+      
+      <span class="badge bg-secondary flex-grow-1 p-2">{{ text.content }}
+
+
+        <div class="form-check">
+          <input class="form-check-input"
+                 type="checkbox"
+                 id="flexCheckDefault"
+                 (change)="onCheckboxChange($event, text.id)">
+        </div>
+        
+
+      </span>
       <button class="btn btn-info btn-sm ms-2 me-1" (click)="editText(text.id)">Edytuj</button>
-      <button class="btn btn-danger btn-sm" (click)="removeText(text.id)">Usuń</button>
+   
     </ng-template>
 
   </div>
